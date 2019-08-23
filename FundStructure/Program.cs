@@ -6,8 +6,8 @@ namespace FundStructure
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
+            
+            // This is number guess game
             Random myRandom = new Random();
             int s_n = myRandom.Next(0, 1000);
 
