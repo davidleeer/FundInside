@@ -8,4 +8,4 @@ Basic conceppt in this stategy:
 4. All the trading must based on a way to nominization: a measure to make
 the strategy can work with statistic
 5. different term use different measure
-6. 
+6. Result review and strategy update

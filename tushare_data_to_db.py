@@ -7,8 +7,9 @@ for the limitation of access 250 stocks each time
 @author: David
 """
 
-import MySQLdb as mdb
+
 import pymysql
+
 import tushare as ts
 import datetime as dt
 import pandas as pd
@@ -21,7 +22,7 @@ tick_list = pro.stock_basic(exchange='', list_status='L',
 
 now = dt.datetime.utcnow()
 df = pd.DataFrame()
-for i in range(1000, 1250):
+for i in range(2250, 2500):
     d = tick_list['ts_code'][i]
 
     df_temp = pro.daily(ts_code=d, start_date='20100101', end_date='20190720')
@@ -30,9 +31,9 @@ for i in range(1000, 1250):
 
 df['created_date'] = now
 df['last_updated_date'] = now
+df
 
 # define functon to insert df into database
-pymysql.install_as_MySQLdb()
 
 
 def insert_daily_data_into_db(data, table, name):
@@ -56,7 +57,7 @@ def insert_daily_data_into_db(data, table, name):
     db_pass = 'password'
     db_name = 'securities_china'
 
-    con = mdb.connect(
+    con = pymysql.connect(
         host=db_host, user=db_user, passwd=db_pass, db=db_name
     )
 
@@ -76,7 +77,6 @@ insert_str = ('%s, ' * 14)[:-2]
 insert_daily_data_into_db(df, column_str, insert_str)
 
 # check db status
-pymysql.install_as_MySQLdb()
 
 
 db_host = 'localhost'
@@ -84,7 +84,7 @@ db_user = 'super_user'
 db_pass = 'password'
 db_name = 'securities_china'
 
-con = mdb.connect(
+con = pymysql.connect(
     host=db_host, user=db_user, passwd=db_pass, db=db_name
 )
 
